@@ -1,0 +1,66 @@
+#form-container{
+    margin:auto;
+    width: 270px;
+    height: 300px;
+    border-radius: 5px;
+    background-color: #16A085;
+    box-sizing: border-box;
+    display: flex;
+    align-items: center;
+}
+
+#form{
+    width: 97%;
+    height: 97%;
+    box-sizing: border-box;
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    justify-content: space-around;
+    background-color: #1ABC9C;
+    margin: auto;
+}
+
+.field-container{
+    box-sizing: border-box;
+    width:100%;
+    display: flex;
+    flex-direction: column;
+    padding-left:10px;
+    padding-right: 10px;
+}
+
+#salary-birthday-container{
+    display: flex;
+    justify-content: center;
+    flex-direction: row;
+    width:100%;
+    gap: 20px;
+
+}
+
+#salary-container, #birthday-container{
+    padding:0;
+    width:40%;
+    flex: 1;
+}
+
+input{
+    border-radius: 0;
+    height: 20px;
+}
+
+#button-container{
+    box-sizing: border-box;
+    width: 100%;
+    display: flex;
+    justify-content: flex-end;
+    padding: 10px;
+}
+
+#submit{
+    background-color: #16A085;
+    border: none;
+    border-radius: 5px;
+    box-shadow: 1px 1px 1px black;
+}
