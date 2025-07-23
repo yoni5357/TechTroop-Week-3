@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>DOM</title>
+    <link rel="stylesheet" href="style.css" />
+</head>
+
+<body>
+    <div id="container">
+        <div id="playing-field" class="centered">
+            <div id="ball" style="top:0px; left:0px" class="centered"></div>
+        </div>
+        <div id="arrows" class="centered">
+            <div id="up" onclick="pressUp()" class="arrow">&uarr;</div>
+            <div id="left" onclick="pressLeft()" class="arrow">&larr;</div>
+            <div id="right" onclick="pressRight()" class="arrow">&rarr;</div>
+            <div id="down" onclick="pressDown()" class="arrow">&darr;</div>
+        </div>
+    </div>
+    <script src="main.js"></script>
+</body>
+
+</html>
