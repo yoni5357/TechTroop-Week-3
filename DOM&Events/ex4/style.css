@@ -54,7 +54,7 @@ input{
     box-sizing: border-box;
     width: 100%;
     display: flex;
-    justify-content: flex-end;
+    justify-content: space-between;
     padding: 10px;
 }
 
