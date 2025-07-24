@@ -19,3 +19,17 @@ const pressLeft = function(){
 const pressRight = function(){
     ball.style.left = (parseInt(ball.style.left) + 15).toString() + "px"
 }
+
+const moveBall = (e) => {
+  switch (e.code) {
+    case 'ArrowUp':    e.preventDefault(); pressUp();    break;
+    case 'ArrowDown':  e.preventDefault(); pressDown();  break;
+    case 'ArrowLeft':  e.preventDefault(); pressLeft();  break;
+    case 'ArrowRight': e.preventDefault(); pressRight(); break;
+  }
+};
+
+// Add event listeners when the DOM is loaded
+document.addEventListener('DOMContentLoaded', function() {
+    document.addEventListener('keydown', moveBall);
+}   );
