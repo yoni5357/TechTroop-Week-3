@@ -17,6 +17,21 @@ const getRandomColor = function() {
   return niceColors[randomPosition];
 }
 
+function checkColorMatch(){
+    const boxes = document.querySelectorAll('.box');
+    const firstColor = boxes[0].style.backgroundColor;
+    const allMatch = Array.from(boxes).every(box => box.style.backgroundColor === firstColor);
+    if(allMatch){
+        const resultText = document.createElement('p');
+        resultText.textContent =  "Nice job!";
+        resultText.style.color = "green";
+        document.getElementById('container').appendChild(resultText);
+    }
+}
+
 document.addEventListener('DOMContentLoaded', function() {
-    generateBoxes()
+    generateBoxes();
+    document.querySelectorAll('.box').forEach(box => {
+        box.addEventListener('mouseover', checkColorMatch);
+    });
 });
