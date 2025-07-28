@@ -14,7 +14,12 @@ function checkInventory(items) {
   // 4. Rejects with specific item that's out of stock
   return new Promise((resolve, reject) => {
     setTimeout(() => {
-        
+        for(let item of items){
+            if(item.stock === 0){
+                reject(item);
+            }
+        }
+        resolve(items)
     }, 500)
   })
 }
