@@ -15,13 +15,13 @@ function checkInventory(items) {
   return new Promise((resolve, reject) => {
     setTimeout(() => {
         for(let item of items){
-            if(item.stock === 0){
-                reject(item);
+            if(inventory[item].stock === 0){
+                return reject(new Error(`${item} is out of stock`));
             }
         }
-        resolve(items)
+        resolve(items);
     }, 500)
-  })
+  });
 }
 
 function calculateTotal(items) {
@@ -29,6 +29,19 @@ function calculateTotal(items) {
   // 1. Waits 200ms
   // 2. Calculates total price including 8% tax
   // 3. Resolves with { subtotal, tax, total }
+  return new Promise((resolve, reject) =>{
+    setTimeout(() => {
+        let subtotal = 0;
+        let tax = 0;
+        let total = 0;
+        for(let item of items){
+            subtotal += inventory[item].price;
+            tax += inventory[item].price * 0.08;
+            total += inventory[item].price * 1.08;
+        }
+        resolve({'subtotal': subtotal, 'tax':tax, 'total':total})
+    }, 200);
+  })
 }
 
 function processPayment(amount) {
@@ -37,6 +50,18 @@ function processPayment(amount) {
   // 2. 90% success rate
   // 3. Resolves with { transactionId, amount, status: 'success' }
   // 4. Rejects with payment failure error
+  return new Promise((resolve,reject) => {
+    setTimeout(() => {
+        let chance = Math.random();
+        let transactionId = Math.trunc(chance * Math.random() * 100);
+        if(chance >= 0.9){
+            reject(new Error("payment failed"));
+        }
+        else{
+            resolve({'transactionId': transactionId, 'amount': amount, 'status': "success"})
+        }
+    }, 1500);
+  })
 }
 
 function updateInventory(items) {
@@ -44,6 +69,15 @@ function updateInventory(items) {
   // 1. Waits 300ms
   // 2. Reduces stock for each item
   // 3. Resolves with updated inventory status
+  return new Promise((resolve, reject) => {
+    setTimeout(() => {
+        for(let item of items){
+            let stock = inventory[item].stock;
+            inventory[item].stock = stock > 0 ? stock-=1 : 0;
+        }
+        resolve(inventory)
+    }, 300);
+  })
 }
 
 // TODO: Create a complete checkout function that:
@@ -54,7 +88,19 @@ function updateInventory(items) {
 
 function checkout(itemNames) {
   // TODO: Implement the complete checkout flow
+    return checkInventory(itemNames)
+    .then(calculateTotal)
+    .then(resault => processPayment(resault.total)
+        .then(payment => updateInventory(itemNames)
+            .then(()=> ({
+                payment,
+                items: itemNames,
+                summary: resault
+            }))
+        )
+    );
 }
+
 
 // Test cases:
 checkout(['laptop', 'mouse'])           // Should succeed
